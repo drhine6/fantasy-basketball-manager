@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import PositionSelection from "./PositionSelection";
 
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
@@ -112,28 +113,7 @@ export default function PlayerTable({ players }) {
                 {player.first_name} {player.last_name}
               </TableCell>
               <TableCell component="th" scope="row">
-                <FormGroup column>
-                  <FormControlLabel
-                    control={<Checkbox name="checkedA" />}
-                    label="PG"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox name="checkedB" />}
-                    label="SG"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox name="checkedB" />}
-                    label="SF"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox name="checkedB" />}
-                    label="PF"
-                  />
-                  <FormControlLabel
-                    control={<Checkbox name="checkedB" />}
-                    label="C"
-                  />
-                </FormGroup>
+                <PositionSelection />
               </TableCell>
               <TableCell align="right">{player.min}</TableCell>
               <TableCell align="right">
