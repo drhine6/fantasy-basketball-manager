@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import { useState } from "react";
 import "./App.css";
 import PlayerSearch from "./components/PlayerSearch";
@@ -25,7 +26,13 @@ function App() {
   return (
     <div className="App">
       <PlayerSearch addPlayer={addPlayer} />
+      <h1>Roster</h1>
       <PlayerTable players={players} />
+      <div className="generate">
+        <Button color="primary" variant="contained">
+          Generate Schedules
+        </Button>
+      </div>
     </div>
   );
 }
