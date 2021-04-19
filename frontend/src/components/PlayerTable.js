@@ -122,13 +122,13 @@ export default function PlayerTable({ players }) {
               <TableCell align="right">
                 {(player.ftm / player.fta).toFixed(3)}
               </TableCell>
-              <TableCell align="right">{player.fg3m}</TableCell>
-              <TableCell align="right">{player.reb}</TableCell>
-              <TableCell align="right">{player.ast}</TableCell>
-              <TableCell align="right">{player.stl}</TableCell>
-              <TableCell align="right">{player.blk}</TableCell>
+              <TableCell align="right">{player.fg3m.toFixed(2)}</TableCell>
+              <TableCell align="right">{player.reb.toFixed(2)}</TableCell>
+              <TableCell align="right">{player.ast.toFixed(2)}</TableCell>
+              <TableCell align="right">{player.stl.toFixed(2)}</TableCell>
+              <TableCell align="right">{player.blk.toFixed(2)}</TableCell>
               <TableCell align="right">TODO</TableCell>
-              <TableCell align="right">{player.pts}</TableCell>
+              <TableCell align="right">{player.pts.toFixed(2)}</TableCell>
             </TableRow>
           ))}
           {players.length ? (
