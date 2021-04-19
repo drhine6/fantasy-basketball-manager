@@ -3,7 +3,7 @@ import "./App.css";
 import PlayerSearch from "./components/PlayerSearch";
 import PlayerTable from "./components/PlayerTable";
 
-const API_ENDPOINT = "https://www.balldontlie.io/api/v1/stats";
+const API_ENDPOINT = "https://www.balldontlie.io/api/v1/season_averages";
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -14,7 +14,14 @@ function App() {
     console.log(url);
     fetch(url)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data.data.length) {
+          const playerData = data.data[0];
+          const newPlayer = { ...player, ...playerData };
+          console.log(newPlayer);
+          setPlayers(players.concat(newPlayer));
+        }
+      });
   };
 
   return (

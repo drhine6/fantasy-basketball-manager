@@ -40,15 +40,25 @@ export default function PlayerTable({ players }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {players.map((row) => (
-            <TableRow key={row.name}>
+          {players.map((player) => (
+            <TableRow key={player.id}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {player.first_name} {player.last_name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{player.min}</TableCell>
+              <TableCell align="right">
+                {((player.fgm + player.fg3m / 2) / player.fga).toFixed(3)}
+              </TableCell>
+              <TableCell align="right">
+                {player.ftm} / {player.fta}
+              </TableCell>
+              <TableCell align="right">{player.fg3m}</TableCell>
+              <TableCell align="right">{player.reb}</TableCell>
+              <TableCell align="right">{player.ast}</TableCell>
+              <TableCell align="right">{player.stl}</TableCell>
+              <TableCell align="right">{player.blk}</TableCell>
+              <TableCell align="right">TODO</TableCell>
+              <TableCell align="right">{player.pts}</TableCell>
             </TableRow>
           ))}
         </TableBody>
