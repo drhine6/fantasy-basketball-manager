@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import PlayerSearch from "./components/PlayerSearch";
 import PlayerTable from "./components/PlayerTable";

@@ -7,6 +7,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
@@ -89,6 +92,7 @@ export default function PlayerTable({ players }) {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
+            <TableCell>Position</TableCell>
             <TableCell align="right">MIN</TableCell>
             <TableCell align="right">AFG%</TableCell>
             <TableCell align="right">FT%</TableCell>
@@ -106,6 +110,30 @@ export default function PlayerTable({ players }) {
             <TableRow key={player.id}>
               <TableCell component="th" scope="row">
                 {player.first_name} {player.last_name}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                <FormGroup column>
+                  <FormControlLabel
+                    control={<Checkbox name="checkedA" />}
+                    label="PG"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox name="checkedB" />}
+                    label="SG"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox name="checkedB" />}
+                    label="SF"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox name="checkedB" />}
+                    label="PF"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox name="checkedB" />}
+                    label="C"
+                  />
+                </FormGroup>
               </TableCell>
               <TableCell align="right">{player.min}</TableCell>
               <TableCell align="right">
@@ -127,6 +155,9 @@ export default function PlayerTable({ players }) {
             <TableRow key="totals">
               <TableCell component="th" scope="row">
                 Expected Value
+              </TableCell>
+              <TableCell component="th" scope="row">
+                --
               </TableCell>
               <TableCell align="right">--</TableCell>
               <TableCell align="right">
