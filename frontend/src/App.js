@@ -9,16 +9,14 @@ function App() {
   const [players, setPlayers] = useState([]);
 
   const addPlayer = async (player) => {
-    console.log(player);
     const url = `${API_ENDPOINT}?seasons[]=2020&player_ids[]=${player.id}`;
-    console.log(url);
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         if (data.data.length) {
           const playerData = data.data[0];
           const newPlayer = { ...player, ...playerData };
-          console.log(newPlayer);
+
           setPlayers(players.concat(newPlayer));
         }
       });
