@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import PlayerSearch from "./components/PlayerSearch";
 import PlayerTable from "./components/PlayerTable";
+import PlayerScheduleTable from "./components/PlayerScheduleTable";
 import moment from "moment";
 import { data } from "./db_temp";
 
@@ -32,19 +33,46 @@ function App() {
     const teamIds = [...new Set(players.map((player) => player.team.id))];
     const teamIdsString = teamIds.join("&team_ids[]=");
     url += "&team_ids[]=" + teamIdsString;
+
+    // get all the games for all the players in the given week then assign them to players
+    // this is a bit ugly but is done in an effort to limit API calls
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         const allGames = data.data;
+        console.log(allGames);
         const playersWithSchedules = players.map((player) => {
           const games = allGames.filter(
             (game) =>
               game.home_team.id === player.team.id ||
               game.visitor_team.id === player.team.id
           );
-          return { ...player, games };
+          var gamesFiltered = [];
+          for (var i = 0; i < 7; i++) {
+            const currentDate = moment()
+              .isoWeekday(1)
+              .add(i, "days")
+              .format("YYYY-MM-DD");
+            const currentDateGame = games.find(
+              (game) =>
+                moment(game.date).add(1, "days").format("YYYY-MM-DD") ===
+                currentDate
+            );
+            if (currentDateGame) {
+              if (currentDateGame.home_team.id === player.team.id) {
+                gamesFiltered.push(currentDateGame.visitor_team.abbreviation);
+              } else {
+                gamesFiltered.push(
+                  `@${currentDateGame.home_team.abbreviation}`
+                );
+              }
+            } else {
+              gamesFiltered.push("none");
+            }
+          }
+          return { ...player, games: gamesFiltered };
         });
-        console.log(JSON.stringify(playersWithSchedules));
+
         setPlayers(playersWithSchedules);
       });
   };
@@ -52,6 +80,8 @@ function App() {
   return (
     <div className="App">
       <PlayerSearch addPlayer={addPlayer} />
+      <h1>Schedule</h1>
+      {players[0].games ? <PlayerScheduleTable players={players} /> : null}
       <h1>Roster</h1>
       <PlayerTable players={players} />
       <div className="generate">
