@@ -26,6 +26,13 @@ function App() {
       });
   };
 
+  const updatePosition = (player, positions) => {
+    var playersTemp = players.filter((p) => p.id !== player.id);
+    const updatedPlayer = { ...player, positions };
+    playersTemp.push(updatedPlayer);
+    setPlayers(playersTemp);
+  };
+
   const getSchedules = () => {
     const startDate = moment().isoWeekday(1).format("YYYY-MM-DD");
     const endDate = moment().isoWeekday(1).add(6, "days").format("YYYY-MM-DD");
@@ -83,7 +90,7 @@ function App() {
       <h1>Schedule</h1>
       {players[0].games ? <PlayerScheduleTable players={players} /> : null}
       <h1>Roster</h1>
-      <PlayerTable players={players} />
+      <PlayerTable players={players} updatePosition={updatePosition} />
       <div className="generate">
         <Button color="primary" variant="contained" onClick={getSchedules}>
           Generate Schedules

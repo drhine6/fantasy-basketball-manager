@@ -8,7 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import PositionSelection from "./PositionSelection";
 
-export default function PlayerTable({ players }) {
+export default function PlayerTable({ players, updatePosition }) {
   const [totals, setTotals] = useState({
     pts: 0,
     fg3m: 0,
@@ -100,7 +100,10 @@ export default function PlayerTable({ players }) {
                 <p>{player.team.abbreviation}</p>
               </TableCell>
               <TableCell component="th" scope="row">
-                <PositionSelection />
+                <PositionSelection
+                  updatePosition={updatePosition}
+                  player={player}
+                />
               </TableCell>
               <TableCell align="right">{player.min}</TableCell>
               <TableCell align="right">
